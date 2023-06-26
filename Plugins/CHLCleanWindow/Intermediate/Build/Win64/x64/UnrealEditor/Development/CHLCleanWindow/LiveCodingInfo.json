@@ -1,0 +1,10 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.CHLCleanWindow.cpp.obj": [
+			"CHLCleanWindow.cpp.obj",
+			"CHLCleanWindowCommands.cpp.obj",
+			"CHLCleanWindowStyle.cpp.obj"
+		]
+	}
+}

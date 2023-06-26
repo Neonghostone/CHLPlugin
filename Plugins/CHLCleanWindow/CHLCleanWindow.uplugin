@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "CHLCleanWindow",
+	"Description": "This is a plugin for everyone to make a story. ",
+	"Category": "Other",
+	"CreatedBy": "Ferran Tantinnya Bernades",
+	"CreatedByURL": "www.creativeovenstudios.com",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "CHLCleanWindow",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

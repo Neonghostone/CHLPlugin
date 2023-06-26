@@ -1,0 +1,83 @@
+Task List: 
+
+Now start from scratch another plugin. Cleaner and such.
+
+CHL When you write something it will happen in the game, OR Creative Mith Language
+
+Once a upon a time there was Main character at street, called meow 
+when meow was walking on street 
+
+Once you hit play the story will happen and the game will start 
+
+Then you assign on the engine the class that is the main character and it will spawn  
+
+https://www.youtube.com/watch?v=v3_HkAU_rls&t=36s
+
+Date 11 3 2023
+
+Once upon a time there was a pawn. 
+
+Overview/PreRequisits: 
+
+There will be 3 main core classes that will be necessary for the game. 
+
+Main 
+
+· StoryElement/Element, will represent to be a class with location and rotation and other aspects. 
+· StoryCharacter/Personatge, Will represent to be an element that can have movement and all. 
+· ConsciousController/Controlador Consient, will b have the input
+
+Secondary
+
+· Plot/Trama Like a game info it will determinate the rules when is victory or not
+· ArtificialController/ ControladorArtificial class that will tell what to do ( Move to etc will execute that ) 
+example also assign write down the Input to choose the fuunction to call ATTACK FUNCTION = MEOW or MISCELLENOUS FUNCTION 
+
+... more helper classes
+
+Keywords: 
+
+1 "Once", will begin everything.
+2 a "Character" 
+3 "Called" will give it a name 
+4 "You are/were" Will posses by player controller 
+5 "Victory/Defeat" it will display victory or defeat in game 
+6 "if" "is" conditionals EX. If Meow health Is 100 Do MeowYell.
+7 "can" EX. MeowYell can MeowYell That is do ray from 
+8 "From" will represent a location
+9 "Found" at a keyword that means to spawn nearby post words Front Rear Left Right... 
+10 "Met" Basically there should be the 
+11 " Moved " like " Name of animation " 
+
+Advanced: Maybe CML would be the AI one and it would be like it generates game it has key words like +
+
+1 "in the" //"it will make happen by the age you specify" 200 A.D. there was a character you were this character called romilius and romilius 
+2 "  " 
+
+
+
+
+Methodology of Usage CHL
+
+1 When the keyword is registered it will go together will have pre words and post words 
+
+Example 
+
+ONCE upon a time there was a CHARACTER "named" michaelo and he was expert drawing and found and "enemy" CHARACTER "Infront" and 
+ 
+CHL Interface
+
+To register all the words do it make an array of Keywords with the Post Words of em and the Pre Words
+then the code will get processed and it will create the story.
+
+Execute code on play OR execute on cicking button....
+
+Since the level also matters you want to make an option reflect on editor to make sure it runs fine
+
+
+
+
+
+
+
+

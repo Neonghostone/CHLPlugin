@@ -13,5 +13,8 @@ UCLASS()
 class CHLCLEAN_API ACHLCleanGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public: 
+
+	ACHLCleanGameModeBase(); 
 };

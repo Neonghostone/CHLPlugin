@@ -29,17 +29,29 @@ public:
 	FReply OnButtonCompileClicked();
 	// 
 	//OTHER
-	void RunScripts(FText pScriptText, int StartIndex); 
-	void ProcessKeyWord(FString pScriptWord); 
+	void RunScripts (FText pScriptText, int StartIndex); 
+	void ProcessKeyWord(FString pScriptWord, int EndPos);
+	void HandleCheckIsIfKeywordTagKeyword(FString pKeyWord, TArray<FString> pPreWord, TArray<FString> pPostWord);
+	TArray<FString> GetPreWordsOfKeyWord(FString pKeyWord, int pStartingPosition);
+	TArray<FString> GetPostWordsOfKeyWord(FString pKeyWord, int pStartingPosition);
+	void HandlePawnKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord); //Should be array of keywords later on
+	void HandleAtKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
+	void HandleVectorKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
+	void HandleLocationKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
+	void HandleToKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
+
 
 	//Vars
 	FText ActualScriptText; 
+	TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs& SpawnTabArgs);
+	void RegisterMenus();
+
 
 private:
 
-	void RegisterMenus();
 
-	TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs& SpawnTabArgs);
+
+
 
 
 

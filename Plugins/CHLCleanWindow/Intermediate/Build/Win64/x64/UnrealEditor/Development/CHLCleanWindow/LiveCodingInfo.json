@@ -2,9 +2,16 @@
 	"RemapUnityFiles": 
 	{
 		"Module.CHLCleanWindow.cpp.obj": [
+			"CHLCleanWindow.init.gen.cpp.obj",
+			"CHLMyEngineSubsystem.gen.cpp.obj",
+			"MyLevelInstanceSubsystem.gen.cpp.obj",
+			"MyWorldSubsystem.gen.cpp.obj",
 			"CHLCleanWindow.cpp.obj",
 			"CHLCleanWindowCommands.cpp.obj",
-			"CHLCleanWindowStyle.cpp.obj"
+			"CHLCleanWindowStyle.cpp.obj",
+			"CHLMyEngineSubsystem.cpp.obj",
+			"MyLevelInstanceSubsystem.cpp.obj",
+			"MyWorldSubsystem.cpp.obj"
 		]
 	}
 }

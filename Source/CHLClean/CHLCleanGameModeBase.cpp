@@ -4,6 +4,8 @@
 #include "CHLCleanGameModeBase.h"
 #include "CHLTestPawnMaxPar.h"
 
+
+
 ACHLCleanGameModeBase::ACHLCleanGameModeBase()
 {
 	

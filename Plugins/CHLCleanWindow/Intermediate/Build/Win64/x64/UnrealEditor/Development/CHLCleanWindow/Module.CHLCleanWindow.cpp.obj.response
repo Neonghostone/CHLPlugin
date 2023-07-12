@@ -273,6 +273,7 @@ D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Inte
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AIModule\UHT
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
+/I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\UnrealEditor\Inc\CHLCleanWindow\UHT
 /I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Source
 /I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Source\CHLCleanWindow\Public
 /external:W0

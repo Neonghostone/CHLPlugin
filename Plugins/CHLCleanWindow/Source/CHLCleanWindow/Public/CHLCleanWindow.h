@@ -5,12 +5,29 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
+//Other
+#include "Delegates/Delegate.h"
+
+
 class FToolBarBuilder;
 class FMenuBuilder;
+class UMyWorldSubsystem; 
+class UMyLevelInstanceSubsystem;
+
+
+
+DECLARE_DELEGATE(FDelegateBeginPlay);
+
+//DECLARE_MULTICAST_DELEGATE(FOnWorldBeginPlay); can be of use
+//FOnWorldBeginPlay OnWorldBeginPlay;
+
+
 
 class FCHLCleanWindowModule : public IModuleInterface
 {
 public:
+
+
 
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
@@ -39,18 +56,45 @@ public:
 	void HandleVectorKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
 	void HandleLocationKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
 	void HandleToKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
-
+	void RegisterMenus();
+	bool bIsVectorOrFloat(FString StringEntering); 
+	//Neongho: to get called by delegate
+	void OnBeginPlayFunction(); 
 
 	//Vars
 	FText ActualScriptText; 
+	FString NameOfPlugin = "CHLPluginForUnreal"; 
 	TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs& SpawnTabArgs);
-	void RegisterMenus();
+
+	//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTestDelegate);
+	//UPROPERTY(BlueprintAssignable, Category = "Test")
+	// 
+	// 
+
+
+	/*
+	DECLARE_MULTICAST_DELEGATE(FTestDelegate);
+	UPROPERTY(BlueprintAssignable, Category = "Test")
+		FTestDelegate StaticDelegateOnWorldInit;
+	*/
+
+	//FTestDelegate OnTestDelegate;
+	UPROPERTY(BlueprintAssignable)
+		FDelegateBeginPlay OnTestBeginPlay;
+
+
+	//The instance that we have of our world
+	UMyWorldSubsystem * MyMyWorldSubsystem;
+
+
+	//The instance that we have of our world
+	UCHLMyEngineSubsystem * MyEngineSubsystem;
+
+
+
 
 
 private:
-
-
-
 
 
 

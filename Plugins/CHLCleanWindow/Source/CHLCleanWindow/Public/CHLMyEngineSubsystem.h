@@ -26,7 +26,7 @@ struct ActionsPerActor
 	AActor* ActorBindToAction;
 };
 
-
+//if (GetWorld()->WorldType != EWorldType::Editor) to recognize the world you playing in
 
 /**
  * Create struct with @ Actions @ 1 Mem * Actor 2 Mem * Move ... examples
@@ -44,5 +44,6 @@ public:
 	//Vars
 	int32 PersIntOfSubsystem; 
 	FString PersistentScriptsText;
-
+	FText PersistentScriptsTextV;
+	TArray<ActionsPerActor> ActionsToProcessOnLevelStart; 
 };

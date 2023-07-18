@@ -55,9 +55,14 @@ public:
 	void HandleAtKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
 	void HandleVectorKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
 	void HandleLocationKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
-	void HandleToKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord);
+	void HandleToKeyword( TArray<FString> pPreWord, TArray<FString> pPostWord);
 	void RegisterMenus();
-	bool bIsVectorOrFloat(FString StringEntering); 
+	TArray<ActionsPerActor> CreateNewActionsForActor(AActor* ActorDoingAction, TArray<FString> PreWords, TArray<FString> PostWords, FString KeywordForActions, int32 pPreWordsI, int32 pPostWordsI);
+
+	bool bIsVectorOrFloat(FString StringEntering);
+
+
+
 	//Neongho: to get called by delegate
 	void OnBeginPlayFunction(); 
 
@@ -65,6 +70,9 @@ public:
 	FText ActualScriptText; 
 	FString NameOfPlugin = "CHLPluginForUnreal"; 
 	TSharedRef<class SDockTab> OnSpawnPluginTab(const class FSpawnTabArgs& SpawnTabArgs);
+
+
+
 
 	//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTestDelegate);
 	//UPROPERTY(BlueprintAssignable, Category = "Test")

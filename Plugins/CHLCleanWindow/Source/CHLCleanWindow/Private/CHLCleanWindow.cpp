@@ -17,7 +17,7 @@
 #include "MyWorldSubsystem.h"
 #include "CHLMyEngineSubsystem.h"
 
-
+//if (GetWorld()->WorldType != EWorldType::Editor) to recognize the world you playing in
 
 static const FName CHLCleanWindowTabName("CHLCleanWindow");
 
@@ -25,7 +25,6 @@ static const FName CHLCleanWindowTabName("CHLCleanWindow");
 
 void FCHLCleanWindowModule::StartupModule()
 {
-
 
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	
@@ -91,9 +90,6 @@ void FCHLCleanWindowModule::ShutdownModule()
 
 TSharedRef<SDockTab> FCHLCleanWindowModule::OnSpawnPluginTab(const FSpawnTabArgs& SpawnTabArgs)
 {
-
-	UE_LOG(LogTemp, Warning, TEXT("FROM CHLClean window OnSpawnPluginTab() getting it binded "));
-	
 	MyMyWorldSubsystem = GEngine->GetWorldContexts()[0].World()->GetSubsystem<UMyWorldSubsystem>();
 	MyMyWorldSubsystem->ReceiveTheModuleRef(this);
 
@@ -102,9 +98,6 @@ TSharedRef<SDockTab> FCHLCleanWindowModule::OnSpawnPluginTab(const FSpawnTabArgs
 	FText sForUse = FText::FromString("sItem.c_str()");
 	FString StringFromText = sForUse.ToString();
 	StringFromText = ActualScriptText.ToString();
-
-
-
 
 	//MyMyWorldSubsystem->OnWorldBeginPlayCHL.AddDynamic(this, &FCHLCleanWindowModule::OnBeginPlayFunction );
 
@@ -275,9 +268,58 @@ void FCHLCleanWindowModule::RegisterMenus()
 	}
 }
 
+TArray<ActionsPerActor> FCHLCleanWindowModule::CreateNewActionsForActor(AActor* ActorDoingAction, TArray<FString> pPreWords, TArray<FString> pPostWords, FString pKeyword, int32 pPreWordsI, int32 pPostWordsI)
+{
+	TArray<ActionsPerActor> LocalFinalActionsOnActor; 
+	ActionsPerActor LocalActionPerActory;
+	ActionOfStoryOfActor LocalActionStory; 
+	FVector3d LocRellevantTowardsAction;
+	//APawn * PawnGoingTo; 
+
+	//PawnGoingTo = Cast<APawn>(ActorDoingAction);
 
 
-//----------------------------------Assets widgets functions-----------------------------------------// 
+
+	//Now enter the actor spawned after wards create the array of actions then send it to engine subsystem
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions "));
+
+	//Like move to 
+	if(pKeyword == "To")
+	{ 
+		if (pPostWords.Num() > 0 + pPostWordsI)
+		{
+			if (pPostWords.Num() > 1 + pPostWordsI)
+			{
+				LocRellevantTowardsAction.X = FCString::Atoi(*pPostWords[1 + pPostWordsI]);
+			}
+			if (pPostWords.Num() > 2 + pPostWordsI)
+			{
+				LocRellevantTowardsAction.Y = FCString::Atoi(*pPostWords[2 + pPostWordsI]);
+			}
+			if (pPostWords.Num() > 3 + pPostWordsI)
+			{
+				LocRellevantTowardsAction.Z = FCString::Atoi(*pPostWords[3 + pPostWordsI]);
+			}
+
+		}
+	}
+
+	LocalActionStory.KindOfStoryActionToDo = EN_MoveTo; 
+	LocalActionStory.TimeToDoThatAction = 0.0f; 
+	LocalActionStory.PointToGoOrElse = LocRellevantTowardsAction;
+
+	LocalActionPerActory.ActorBindToAction = ActorDoingAction;
+	LocalActionPerActory.ActionOfStoryOfActor.Add(LocalActionStory);
+
+	LocalFinalActionsOnActor.Add(LocalActionPerActory);
+	
+
+	return LocalFinalActionsOnActor;
+}
+
+
+
+
 void FCHLCleanWindowModule::OnTextCommitted(const FText& InText)
 {
 	//String conversion
@@ -285,8 +327,8 @@ void FCHLCleanWindowModule::OnTextCommitted(const FText& InText)
 	FString SomeString = sForUse.ToString();
 	SomeString = InText.ToString();
 
-	UE_LOG(LogTemp, Warning, TEXT("From CHLCLeanWindow.cpp the text is: %s"), *SomeString);
-	
+	UE_LOG(LogTemp, Warning, TEXT("From CHLCLeanWindow.cpp ios commited:"));
+	//UE_LOG(LogTemp, Warning, TEXT("From CHLCLeanWindow.cpp ios commited: %s"), *SomeString);
 }
 
 void FCHLCleanWindowModule::OnTextChanged(const FText& InText)
@@ -320,12 +362,9 @@ void FCHLCleanWindowModule::RunScripts(FText pScriptText, int StartIndex)
 	FString LetterDetected;
 	FString WordKeyWordDetected;
 
-
 	MyEngineSubsystem->PersistentScriptsText = SomeString;
+	MyEngineSubsystem->PersistentScriptsTextV = pScriptText;
 
-	UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin RUNNING SCRIPTS THE INDEX IS %i"), StartIndex );
-
-	UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin RUNNING SCRIPTS THE INDEX IS %s"), *MyEngineSubsystem->PersistentScriptsText);
 
 	for (int32 i = StartIndex; i < SomeString.Len(); ++i)//SomeString.Len() - 1
 	{
@@ -336,8 +375,7 @@ void FCHLCleanWindowModule::RunScripts(FText pScriptText, int StartIndex)
 		if (LetterDetected == " " )
 		{
 			ProcessKeyWord(WordKeyWordDetected, i);
-			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS COmplete word found %s"), *WordKeyWordDetected);
-			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS COmplete word found I index is %i"), i)
+			//UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS COmplete word found %s"), *WordKeyWordDetected);
 			WordKeyWordDetected.Empty(); 
 			//return;
 		}
@@ -353,16 +391,28 @@ void FCHLCleanWindowModule::RunScripts(FText pScriptText, int StartIndex)
 //*1: Script word the word processing then it checks if it is of a kind
 void FCHLCleanWindowModule::ProcessKeyWord(FString pScriptWord, int pEndPos)
 {
-	TArray<FString> lPreWord; 
-	TArray<FString> lPostWord;  
+	TArray<FString> lPreWords;
+	TArray<FString> lPostWords;
 
-	//lPreWord = GetPreWordsOfKeyWord(pScriptWord, pEndPos);
+	//lPreWords = GetPreWordsOfKeyWord(pScriptWord, pEndPos);
 	//lPostWord = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
 
 	if ( pScriptWord.Contains("Pawn") )
 	{
-		lPostWord = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
-		HandlePawnKeyword(lPreWord, lPostWord);
+		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		HandlePawnKeyword(lPreWords, lPostWords);
+	}
+
+	if (pScriptWord.Contains("Move"))
+	{
+		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		HandlePawnKeyword(lPreWords, lPostWords);
+	}
+
+	if (pScriptWord.Contains("To"))
+	{
+		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		HandleToKeyword(lPreWords, lPostWords);
 	}
 
 	//RunScripts(ActualScriptText, pEndPos + 1);
@@ -406,54 +456,59 @@ TArray<FString> FCHLCleanWindowModule::GetPreWordsOfKeyWord(FString pKeyWord, in
 //*1: The keyword of it to know the number of indents to get next
 TArray<FString> FCHLCleanWindowModule::GetPostWordsOfKeyWord(FString pKeyWord, int32 pStartingPosition)
 {
+	
 	FText ScriptToConvertToString = ActualScriptText;
 	FString ActualScriptString = ScriptToConvertToString.ToString();
 	FString LetterDetected;
 	FString WordDetected;
 	TArray<FString> AllPostFinalWords;
 
+	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST I start %i"), pStartingPosition);
+	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST I  end  length %i"), ActualScriptString.Len() );
+
+	
 	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  %s"), *ActualScriptString);
 	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST I start %i"), pStartingPosition);
 	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST I  end %i"), ActualScriptString.Len() - pStartingPosition);
 	UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST I  ACtualScriptString length end %i"), ActualScriptString.Len());
 
 
-
-	for (int32 i = pStartingPosition; i < ActualScriptString.Len(); ++i)//SomeString.Len() - 1
+	if ( pStartingPosition+1 < ActualScriptString.Len() )
 	{
-		LetterDetected = *ActualScriptString.Mid(i, 1);
-		UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP %s"), *LetterDetected);
-		UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP I IS START %i"), pStartingPosition);
-		UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP THE END POS IS %i"), ActualScriptString.Len() - pStartingPosition);
-
-
-		if (LetterDetected == " ")
+		for (int32 i = pStartingPosition; i < ActualScriptString.Len(); ++i)//SomeString.Len() - 1
 		{
-			if(WordDetected != "")
-			{ 
-				UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword %s"), *WordDetected);
-				AllPostFinalWords.Add(*WordDetected);
-				UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword length %i"), AllPostFinalWords.Num());
-				WordDetected.Empty();
+			LetterDetected = *ActualScriptString.Mid(i, 1);
+			UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP %s"), *LetterDetected);
+			UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP I IS START %i"), pStartingPosition);
+			UE_LOG(LogTemp, Warning, TEXT("FROM Starting check of POST  LOOP THE END POS IS %i"), ActualScriptString.Len() - pStartingPosition);
+
+
+			if (LetterDetected == " ")
+			{
+				if(WordDetected != "")
+				{ 
+					UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword %s"), *WordDetected);
+					AllPostFinalWords.Add(*WordDetected);
+					UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword length %i"), AllPostFinalWords.Num());
+					WordDetected.Empty();
+				}
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord filling word!!!!!!!! %s"), *LetterDetected);
+				WordDetected.Append(LetterDetected);
 			}
 		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord filling word!!!!!!!! %s"), *LetterDetected);
-			WordDetected.Append(LetterDetected);
-		}
-
-
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Final keywords are a keyword length %i"), AllPostFinalWords.Num());
-	UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Final keywords are a keyword first is %s"), *AllPostFinalWords[1]);
+	//UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Final keywords are a keyword length %i"), AllPostFinalWords.Num());
+	//UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Final keywords are a keyword first is %s"), *AllPostFinalWords[1]); 
 	return AllPostFinalWords;
 }
 
 //Desc: Neongho: Handles the pawn keyword 
 //*1: The keyword of it to know the number of indents to get next
-void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord)
+void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<FString> pPostWords)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS THIS WORD PAWNS SPAWMING WORD IS!!!!!!!!!!!!!! %s"), pScriptWord);
 	UWorld* World = GEngine->GetWorldContexts()[0].World();
@@ -462,7 +517,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 	AActor * PawnSpawned;
 	AAIController * ForPawnAIController;
 	int32 LengthOfKeywords = 0; 
-	LengthOfKeywords = pPostWord.Num(); 
+	LengthOfKeywords = pPostWords.Num();
 	FText sForUse = FText::FromString("sItem.c_str()");
 	FString StringFromText = sForUse.ToString();
 	StringFromText = ActualScriptText.ToString();
@@ -489,7 +544,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 
 	//class AVR_Pawn* myPawn = Cast<AVR_Pawn>(myGameMode->DefaultPawnClass.GetDefaultObject());
 
-	UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are length %i"), pPostWord.Num());
+	UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are length %i"), pPostWords.Num());
 
 	ActorSpawningPlaceLoc.X = 100.0f;//Not in use text instead
 	ActorSpawningPlaceLoc.Y = 100.0f;
@@ -497,18 +552,21 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 
 
 	//If is for vectors acces it
-	if(pPostWord.Num() > 0)
+	if(pPostWords.Num() > 0)
 	{ 
-		UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are KEYWORDS %s"), *pPostWord[0], *pPostWord[1], *pPostWord[2], *pPostWord[3]);
+		UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are KEYWORDS %s"), *pPostWords[0], *pPostWords[1], *pPostWords[2], *pPostWords[3]);
 
-		if (pPostWord[0] == "at")
+		if (pPostWords[0] == "at")
 		{
 			UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() AT keyword detected NOW SETTING LOCATIONS"));
 
-			ActorSpawningPlaceLoc.X = FCString::Atoi(*pPostWord[1]); 
-			ActorSpawningPlaceLoc.Y = FCString::Atoi(*pPostWord[2]);
-			ActorSpawningPlaceLoc.Z = FCString::Atoi(*pPostWord[3]); 
+			ActorSpawningPlaceLoc.X = FCString::Atoi(*pPostWords[1]);
+			ActorSpawningPlaceLoc.Y = FCString::Atoi(*pPostWords[2]);
+			ActorSpawningPlaceLoc.Z = FCString::Atoi(*pPostWords[3]);
 		}
+
+
+
 	}
 
 
@@ -519,7 +577,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 	//GeneratedBPPawn->GeneratedClass
 	UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS THIS WORD PAWNS SPAWMING PAWN!!!!!!!!!!!!!!"));
 	FString bpResourcePawn = "/Game/CreativeHistoryLangangeContent/CHLPawnDefaultToTest.CHLPawnDefaultToTest";
-	FString bpResourceAIController = "/Game/CreativeHistoryLangangeContent/CHLAIControllerMaxParTestBP.CHLAIControllerMaxParTestBP";
+	FString bpResourceAIController = "/Game/CreativeHistoryLangangeContent/CHLAIPluginNotGameAI.CHLAIPluginNotGameAI";
 	UBlueprint* GeneratedBPPawn = Cast<UBlueprint>(StaticLoadObject(UObject::StaticClass(), NULL, *bpResourcePawn));
 	UBlueprint* GeneratedBPAIController = Cast<UBlueprint>(StaticLoadObject(UObject::StaticClass(), NULL, *bpResourceAIController));
 	PawnSpawned = World->SpawnActor<AActor>(GeneratedBPPawn->GeneratedClass, ActorSpawningPlaceLoc, FRotator(0, 0, 0));
@@ -527,6 +585,17 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 	APawn * PawnToCast = Cast<APawn>(PawnSpawned);
 	AAIController * AIControllerToCast = Cast<AAIController>(ForPawnAIController);
 	AIControllerToCast->Possess(PawnToCast);
+
+
+	if( pPostWords.Num() > 4 )
+	{
+		if (pPostWords[4].Contains("To") )
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS"));
+			MyEngineSubsystem->ActionsToProcessOnLevelStart = CreateNewActionsForActor(PawnSpawned, pPreWords, pPostWords, "To", 0, 4);
+		}
+	}
+
 
 	//UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is %s"), *GEngine->GetEngineSubsystemBase(UMyWorldSubsystem::StaticClass())->GetName() );
 	
@@ -555,29 +624,29 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWord, TArray<F
 //Desc: Neongho: Prossed and PreWord in other places
 void FCHLCleanWindowModule::HandleAtKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord)
 {
-
+	UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl KEYWORD DETECTED *************** AT "));
 
 }
 
 //Desc: Neongho: Location then it is always a vector for sure NOT IN USE NOT USEFUL AT FIRST*
 void FCHLCleanWindowModule::HandleVectorKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord)
 {
-
+	UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl KEYWORD DETECTED *************** Vector "));
 
 }
 
 //Desc: Neongho: Location then it is always a vector for sure
 void FCHLCleanWindowModule::HandleLocationKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord)
 {
-
+	UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl KEYWORD DETECTED *************** Location "));
 
 }
 
-//Desc: Neongho: Move to a specific place used after move to
+//Desc: Neongho: Move to a specific place used after move to IT IS PREFIX OR POSTFIX SO... added somehwere else
 void FCHLCleanWindowModule::HandleToKeyword(TArray<FString> pPreWord, TArray<FString> pPostWord)
 {
-
-
+	UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl KEYWORD DETECTED *************** To "));
+	//CreateNewActionsForActor("To");
 }
 
 //Desc: Neongho: True is vector false is float SHOULD BE ENUM AFTER "AT"

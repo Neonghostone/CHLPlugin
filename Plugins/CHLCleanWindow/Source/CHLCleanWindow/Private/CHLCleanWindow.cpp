@@ -278,8 +278,6 @@ TArray<ActionsPerActor> FCHLCleanWindowModule::CreateNewActionsForActor(AActor* 
 
 	//PawnGoingTo = Cast<APawn>(ActorDoingAction);
 
-
-
 	//Now enter the actor spawned after wards create the array of actions then send it to engine subsystem
 	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions "));
 
@@ -313,6 +311,7 @@ TArray<ActionsPerActor> FCHLCleanWindowModule::CreateNewActionsForActor(AActor* 
 
 	LocalFinalActionsOnActor.Add(LocalActionPerActory);
 	
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions final actions num is %i"), LocalFinalActionsOnActor.Num() );
 
 	return LocalFinalActionsOnActor;
 }
@@ -365,6 +364,9 @@ void FCHLCleanWindowModule::RunScripts(FText pScriptText, int StartIndex)
 	MyEngineSubsystem->PersistentScriptsText = SomeString;
 	MyEngineSubsystem->PersistentScriptsTextV = pScriptText;
 
+	//reset the actions once we click
+	MyEngineSubsystem->ActionsToProcessOnLevelStart.Empty(); 
+	
 
 	for (int32 i = StartIndex; i < SomeString.Len(); ++i)//SomeString.Len() - 1
 	{
@@ -405,14 +407,14 @@ void FCHLCleanWindowModule::ProcessKeyWord(FString pScriptWord, int pEndPos)
 
 	if (pScriptWord.Contains("Move"))
 	{
-		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
-		HandlePawnKeyword(lPreWords, lPostWords);
+		//lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		//HandlePawnKeyword(lPreWords, lPostWords);
 	}
 
 	if (pScriptWord.Contains("To"))
 	{
-		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
-		HandleToKeyword(lPreWords, lPostWords);
+		//lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		//HandleToKeyword(lPreWords, lPostWords);
 	}
 
 	//RunScripts(ActualScriptText, pEndPos + 1);
@@ -556,7 +558,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 	{ 
 		UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are KEYWORDS %s"), *pPostWords[0], *pPostWords[1], *pPostWords[2], *pPostWords[3]);
 
-		if (pPostWords[0] == "at")
+		if (pPostWords[0].Contains("at"))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() AT keyword detected NOW SETTING LOCATIONS"));
 
@@ -565,10 +567,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 			ActorSpawningPlaceLoc.Z = FCString::Atoi(*pPostWords[3]);
 		}
 
-
-
 	}
-
 
 	ActorSpawningPlaceRot.Yaw = 0;//Not in use
 	ActorSpawningPlaceRot.Pitch = 0;
@@ -576,7 +575,7 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 	
 	//GeneratedBPPawn->GeneratedClass
 	UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS THIS WORD PAWNS SPAWMING PAWN!!!!!!!!!!!!!!"));
-	FString bpResourcePawn = "/Game/CreativeHistoryLangangeContent/CHLPawnDefaultToTest.CHLPawnDefaultToTest";
+	FString bpResourcePawn = "/Game/GOTA2/Blueprints/Characters/BP_GOTANumeriusOriginaInUsel.BP_GOTANumeriusOriginaInUsel"; ///Game/CreativeHistoryLangangeContent/CHLPawnDefaultToTest.CHLPawnDefaultToTest
 	FString bpResourceAIController = "/Game/CreativeHistoryLangangeContent/CHLAIPluginNotGameAI.CHLAIPluginNotGameAI";
 	UBlueprint* GeneratedBPPawn = Cast<UBlueprint>(StaticLoadObject(UObject::StaticClass(), NULL, *bpResourcePawn));
 	UBlueprint* GeneratedBPAIController = Cast<UBlueprint>(StaticLoadObject(UObject::StaticClass(), NULL, *bpResourceAIController));
@@ -586,17 +585,18 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 	AAIController * AIControllerToCast = Cast<AAIController>(ForPawnAIController);
 	AIControllerToCast->Possess(PawnToCast);
 
-
+	//Make a foreach here to check which is the To keyword and from there process it somehow
 	if( pPostWords.Num() > 4 )
 	{
 		if (pPostWords[4].Contains("To") )
 		{
-			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS"));
-			MyEngineSubsystem->ActionsToProcessOnLevelStart = CreateNewActionsForActor(PawnSpawned, pPreWords, pPostWords, "To", 0, 4);
+			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS FOR TO word "));
+			MyEngineSubsystem->ActionsToProcessOnLevelStart.Append( CreateNewActionsForActor(PawnSpawned, pPreWords, pPostWords, "To", 0, 4) );
+			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS FOR TO word FINAL NUM IS %i"), MyEngineSubsystem->ActionsToProcessOnLevelStart.Num() );
 		}
 	}
 
-
+	
 	//UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is %s"), *GEngine->GetEngineSubsystemBase(UMyWorldSubsystem::StaticClass())->GetName() );
 	
 	if ( GEngine->GetEngineSubsystemBase(UMyWorldSubsystem::StaticClass()) != nullptr )
@@ -608,16 +608,12 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 		UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem IS a null ptr"));
 	}
 
-
 	//UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is %s"), *World->GetSubsystem<UMyWorldSubsystem>()->GetName() );
 	//World->GetSubsystem<UMyWorldSubsystem>(); 
 
-
 	//MyMyWorldSubsystem->ActualScriptsToRun = StringFromText; 
-	MyMyWorldSubsystem->PrintMeMessageFromHere(); 
+	//MyMyWorldSubsystem->PrintMeMessageFromHere(); 
 	
-
-
 	//AIControllerToCast->MoveTo(PawnToCast->GetActorLocation() + ActorSpawningPlaceLoc);
 }
 

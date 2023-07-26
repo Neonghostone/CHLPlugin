@@ -33,9 +33,9 @@
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN:6
-"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h.obj"
-"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.obj"
-"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Default.rc2.res"
+"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.obj"
+"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Default.rc2.res"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Projects\UnrealEditor-Projects.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\InputCore\UnrealEditor-InputCore.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\EditorFramework\UnrealEditor-EditorFramework.lib"
@@ -71,7 +71,7 @@
 "setupapi.lib"
 "dwmapi.lib"
 "imm32.lib"
-/OUT:"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Binaries\Win64\UnrealEditor-CHLCleanWindow.dll"
-/IMPLIB:"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\UnrealEditor-CHLCleanWindow.suppressed.lib"
-/PDB:"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Binaries\Win64\UnrealEditor-CHLCleanWindow.pdb"
+/OUT:"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Binaries\Win64\UnrealEditor-CHLCleanWindow.dll"
+/IMPLIB:"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\UnrealEditor-CHLCleanWindow.suppressed.lib"
+/PDB:"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Binaries\Win64\UnrealEditor-CHLCleanWindow.pdb"
 /ignore:4078

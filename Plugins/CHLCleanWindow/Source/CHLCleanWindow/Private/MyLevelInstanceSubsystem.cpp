@@ -65,7 +65,8 @@ void UMyLevelInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 		for (int32 i2 = 0; i2 < AllActors.Num(); i2++)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("FROM GAME RADAR ************ ACTOR FOUND == %s "), *AllActors[i2]->GetName());
-
+			UE_LOG(LogTemp, Warning, TEXT("FROM GAME RADAR ************ ACTOR FOUND the i2 is num == %i "), i2);
+			UE_LOG(LogTemp, Warning, TEXT("FROM GAME RADAR ************ ACTOR FOUND the AllActors is num == %i "), AllActors.Num());
 			if (AllActors[i2]->GetName() == ActionsToRunNowOnLevel[i].ActorBindToAction->GetName())
 			{
 				UE_LOG(LogTemp, Warning, TEXT("FROM GAME the the actor to move is ************ ACTOR FOUND == %s "), *ActionsToRunNowOnLevel[i].ActorBindToAction->GetName());

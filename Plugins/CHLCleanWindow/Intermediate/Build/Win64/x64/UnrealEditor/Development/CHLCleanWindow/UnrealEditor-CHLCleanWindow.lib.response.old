@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-CHLCleanWindow.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h.obj"
+"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.obj"
+"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Default.rc2.res"
+/OUT:"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\UnrealEditor-CHLCleanWindow.lib"

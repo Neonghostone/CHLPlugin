@@ -17,7 +17,61 @@
 #include "MyWorldSubsystem.h"
 #include "CHLMyEngineSubsystem.h"
 
+
+
+/*   RESOURCES OF CODING
 //if (GetWorld()->WorldType != EWorldType::Editor) to recognize the world you playing in
+	 HOW TO GET ALL CLASSES AND THEN SPAWN SO
+	TArray<UClass*> ResultsOfSearch;
+	TArray<TSharedPtr<FString>> ClassesListToChoose;
+	//TSharedRef<IPropertyHandle> PropertyHandle;
+	DECLARE_DELEGATE_TwoParams(FOnTextCommitted, const FText&, ETextCommit::Type)
+		//FString CurrentSelectedDeviceFamily;
+		//PropertyHandle->GetValue(CurrentSelectedDeviceFamily);
+
+		int CurrentSelectedIndex = 0;
+
+	ResultsOfSearch = GetClasses(AGameModeBase::StaticClass());
+
+	// better suggestions for a check are welcome
+	for (int It = 0; It < ResultsOfSearch.Num(); ++It)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found class and class is %s"), *ResultsOfSearch[It]->GetName());
+		ClassesListToChoose.Add(MakeShareable(new FString(*ResultsOfSearch[It]->GetName())));
+	}
+
+	//OnTestBeginPlay.Add( &FCHLCleanWindowModule::RegisterMenus) This one not good
+
+
+	//MyMyWorldSubsystem->OnWorldBeginPlayCHL.AddDynamic(this, &FCHLCleanWindowModule::OnBeginPlayFunction );
+
+	//GEngine->GetWorldContexts()[0].World()->OnWorldBeginPlay.AddRaw(this, &FCHLCleanWindowModule::OnBeginPlayFunction);
+
+	//GEngine->GetCurrentPlayWorld()->OnWorldBeginPlay.AddRaw(this, &FCHLCleanWindowModule::OnBeginPlayFunction);
+
+	//UClass * PawnToSpawnClass;
+
+	//PawnToSpawnClass = World->GetAuthGameMode()->
+
+	//World->GetAuthGameMode()->
+
+	//class ABaseGameMode* myGameMode = (ABaseGameMode*)World->GetAuthGameMode();
+
+	//PawnToSpawnClass = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
+	//UBlueprint* GeneratedBPPawn = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
+
+	//class APawn* PawnClassToSpawn = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
+
+	//class AVR_Pawn* myPawn = Cast<AVR_Pawn>(myGameMode->DefaultPawnClass.GetDefaultObject());
+	//myGameMode->DefaultPawnClass;
+	//myGameMode->DefaultPawnClass;
+	//PawnToSpawnClass =
+	//WORK IN PROGRESS KEEP FINDING THE PAWN
+
+	//class AVR_Pawn* myPawn = Cast<AVR_Pawn>(myGameMode->DefaultPawnClass.GetDefaultObject());
+
+*/
+
 
 static const FName CHLCleanWindowTabName("CHLCleanWindow");
 
@@ -27,7 +81,6 @@ void FCHLCleanWindowModule::StartupModule()
 {
 
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	
 	FCHLCleanWindowStyle::Initialize();
 	FCHLCleanWindowStyle::ReloadTextures();
 
@@ -45,31 +98,6 @@ void FCHLCleanWindowModule::StartupModule()
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(CHLCleanWindowTabName, FOnSpawnTab::CreateRaw(this, &FCHLCleanWindowModule::OnSpawnPluginTab))
 		.SetDisplayName(LOCTEXT("FCHLCleanWindowTabTitle", "CHLCleanWindow"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
-
-	//OnTestBeginPlay.Add( &FCHLCleanWindowModule::RegisterMenus) This one not good
-
-	/* HOW TO GET ALL CLASSES AND THEN SPAWN SO 
-	TArray<UClass*> ResultsOfSearch;
-	TArray<TSharedPtr<FString>> ClassesListToChoose;
-	//TSharedRef<IPropertyHandle> PropertyHandle; 
-	DECLARE_DELEGATE_TwoParams(FOnTextCommitted, const FText&, ETextCommit::Type)
-		//FString CurrentSelectedDeviceFamily;
-		//PropertyHandle->GetValue(CurrentSelectedDeviceFamily);
-
-		int CurrentSelectedIndex = 0;
-
-	ResultsOfSearch = GetClasses(AGameModeBase::StaticClass());
-
-	// better suggestions for a check are welcome
-	for (int It = 0; It < ResultsOfSearch.Num(); ++It)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Found class and class is %s"), *ResultsOfSearch[It]->GetName());
-		ClassesListToChoose.Add(MakeShareable(new FString(*ResultsOfSearch[It]->GetName())));
-	}
-	*/
-
-
-
 }
 
 void FCHLCleanWindowModule::ShutdownModule()
@@ -98,12 +126,6 @@ TSharedRef<SDockTab> FCHLCleanWindowModule::OnSpawnPluginTab(const FSpawnTabArgs
 	FText sForUse = FText::FromString("sItem.c_str()");
 	FString StringFromText = sForUse.ToString();
 	StringFromText = ActualScriptText.ToString();
-
-	//MyMyWorldSubsystem->OnWorldBeginPlayCHL.AddDynamic(this, &FCHLCleanWindowModule::OnBeginPlayFunction );
-
-	//GEngine->GetWorldContexts()[0].World()->OnWorldBeginPlay.AddRaw(this, &FCHLCleanWindowModule::OnBeginPlayFunction);
-
-	//GEngine->GetCurrentPlayWorld()->OnWorldBeginPlay.AddRaw(this, &FCHLCleanWindowModule::OnBeginPlayFunction);
 
 
 	FText WidgetText = FText::Format(
@@ -200,35 +222,6 @@ TSharedRef<SDockTab> FCHLCleanWindowModule::OnSpawnPluginTab(const FSpawnTabArgs
 				]
 			]
 		];
-
-
-
-	/* HOW TO GET ALL CLASSES AND THEN SPAWN SO
-	TArray<UClass*> ResultsOfSearch;
-	TArray<TSharedPtr<FString>> ClassesListToChoose;
-	//TSharedRef<IPropertyHandle> PropertyHandle;
-	DECLARE_DELEGATE_TwoParams(FOnTextCommitted, const FText&, ETextCommit::Type)
-		//FString CurrentSelectedDeviceFamily;
-		//PropertyHandle->GetValue(CurrentSelectedDeviceFamily);
-
-		int CurrentSelectedIndex = 0;
-
-	ResultsOfSearch = GetClasses(AGameModeBase::StaticClass());
-
-	// better suggestions for a check are welcome
-	for (int It = 0; It < ResultsOfSearch.Num(); ++It)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Found class and class is %s"), *ResultsOfSearch[It]->GetName());
-		ClassesListToChoose.Add(MakeShareable(new FString(*ResultsOfSearch[It]->GetName())));
-	}
-	*/
-	//MyMyWorldSubsystem->OnTestBeginPlay
-
-	//OnTestBeginPlay.BindLambda( &UMyWorldSubsystem::PrintMeMessageFromHere );  
-
-	//OnTestBeginPlay.BindLambda(&OnBeginPlayFunction);
-
-	//MyMyWorldSubsystem->ActualScriptsToRun = StringFromText;
 }
 
 //Neongho: to get called by delegate
@@ -236,7 +229,6 @@ void FCHLCleanWindowModule::OnBeginPlayFunction()
 {
 	UE_LOG(LogTemp, Warning, TEXT( "FROM CHLClean window This is a begin play from the whole game ************" ) );
 }
-
 
 void FCHLCleanWindowModule::PluginButtonClicked()
 {
@@ -275,27 +267,35 @@ TArray<ActionsPerActor> FCHLCleanWindowModule::CreateNewActionsForActor(AActor* 
 	ActionOfStoryOfActor LocalActionStory; 
 	FVector3d LocRellevantTowardsAction;
 	//APawn * PawnGoingTo; 
+	//int32 IndexOfKeyWordFinding; //should be used in various places
 
 	//PawnGoingTo = Cast<APawn>(ActorDoingAction);
 
 	//Now enter the actor spawned after wards create the array of actions then send it to engine subsystem
-	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions "));
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions Number of I for where To is found or any other keyword %i"), pPostWordsI);
+
+	//IndexOfKeyWordFinding = ChackInMountIfThereIsKW(pKeyword, pPostWords);  Left in here just in case
 
 	//Like move to 
 	if(pKeyword == "To")
 	{ 
+		UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions Number of I for where To is found or any other keyword ** %i"), 0 + pPostWordsI);
+
 		if (pPostWords.Num() > 0 + pPostWordsI)
 		{
 			if (pPostWords.Num() > 1 + pPostWordsI)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions Number of I for where To is found or any other keyword TIER 1 ** %i"), 0 + pPostWordsI);
 				LocRellevantTowardsAction.X = FCString::Atoi(*pPostWords[1 + pPostWordsI]);
 			}
 			if (pPostWords.Num() > 2 + pPostWordsI)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions Number of I for where To is found or any other keyword TIER 2 ** %i"), 0 + pPostWordsI);
 				LocRellevantTowardsAction.Y = FCString::Atoi(*pPostWords[2 + pPostWordsI]);
 			}
 			if (pPostWords.Num() > 3 + pPostWordsI)
 			{
+				UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions Number of I for where To is found or any other keyword TIER 3 ** %i"), 0 + pPostWordsI);
 				LocRellevantTowardsAction.Z = FCString::Atoi(*pPostWords[3 + pPostWordsI]);
 			}
 
@@ -313,11 +313,40 @@ TArray<ActionsPerActor> FCHLCleanWindowModule::CreateNewActionsForActor(AActor* 
 	
 	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions final actions num is %i"), LocalFinalActionsOnActor.Num() );
 
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions final X of vec num is %f"), LocRellevantTowardsAction.X );
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions final Y of vec num is %f"), LocRellevantTowardsAction.Y );
+	UE_LOG(LogTemp, Warning, TEXT("FROM CHLCLeanWindow.cpp CreateNewActionsForActor creating actions final Z of vec num is %f"), LocRellevantTowardsAction.Z );
+
+
 	return LocalFinalActionsOnActor;
 }
 
 
+int32 FCHLCleanWindowModule::ChackInMountIfThereIsKW(FString KeywordSearchingFor, TArray<FString> KeyboardMount)
+{
+	for (int32 i = 0; i < KeyboardMount.Num(); i++)
+	{
+		if ( KeyboardMount[i].Contains(KeywordSearchingFor) )
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FROM CHLCleanWindow the Index finally found is %i "), i);
+			return i; 
+		}
+	}
 
+	return -1;
+}
+
+bool FCHLCleanWindowModule::IsImportantKeyword(FString KeywordSearchingFor)
+{
+
+	if (KeywordSearchingFor.Contains("Pawn")) //|| true for later use or
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FROM CHLCleanWindowCPP IsImportantKeyword end looking for key word")); 
+		return true; 
+	}
+
+	return false;
+}
 
 void FCHLCleanWindowModule::OnTextCommitted(const FText& InText)
 {
@@ -367,7 +396,6 @@ void FCHLCleanWindowModule::RunScripts(FText pScriptText, int StartIndex)
 	//reset the actions once we click
 	MyEngineSubsystem->ActionsToProcessOnLevelStart.Empty(); 
 	
-
 	for (int32 i = StartIndex; i < SomeString.Len(); ++i)//SomeString.Len() - 1
 	{
 		LetterDetected = *SomeString.Mid(i, 1);
@@ -396,12 +424,12 @@ void FCHLCleanWindowModule::ProcessKeyWord(FString pScriptWord, int pEndPos)
 	TArray<FString> lPreWords;
 	TArray<FString> lPostWords;
 
-	//lPreWords = GetPreWordsOfKeyWord(pScriptWord, pEndPos);
+	//lPreWords = GetPreWordsOfKeyWord(pScriptWord, pEndPos); 
 	//lPostWord = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
 
 	if ( pScriptWord.Contains("Pawn") )
 	{
-		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos);
+		lPostWords = GetPostWordsOfKeyWord(pScriptWord, pEndPos); //Should do prewords to WIP
 		HandlePawnKeyword(lPreWords, lPostWords);
 	}
 
@@ -426,7 +454,7 @@ void FCHLCleanWindowModule::HandleCheckIsIfKeywordTagKeyword(FString pKeyWord, T
 
 }
 
-//Desc: Neongho: Gets the keywords before the keyword 
+//Desc: Neongho: Gets the keywords before the keyword WIP Post done but not pre
 //*1: The keyword of it to know the number of indents to get next
 TArray<FString> FCHLCleanWindowModule::GetPreWordsOfKeyWord(FString pKeyWord, int32 pStartingPosition)
 {
@@ -489,6 +517,12 @@ TArray<FString> FCHLCleanWindowModule::GetPostWordsOfKeyWord(FString pKeyWord, i
 			{
 				if(WordDetected != "")
 				{ 
+					if (IsImportantKeyword(WordDetected))
+					{
+						return AllPostFinalWords;
+					}
+
+
 					UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword %s"), *WordDetected);
 					AllPostFinalWords.Add(*WordDetected);
 					UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord Detecterd a keyword length %i"), AllPostFinalWords.Num());
@@ -497,6 +531,7 @@ TArray<FString> FCHLCleanWindowModule::GetPostWordsOfKeyWord(FString pKeyWord, i
 			}
 			else
 			{
+
 				UE_LOG(LogTemp, Warning, TEXT("FROM GetPostWordsOfKeyWord filling word!!!!!!!! %s"), *LetterDetected);
 				WordDetected.Append(LetterDetected);
 			}
@@ -524,31 +559,9 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 	FString StringFromText = sForUse.ToString();
 	StringFromText = ActualScriptText.ToString();
 
-
-	//UClass * PawnToSpawnClass; 
-
-	//PawnToSpawnClass = World->GetAuthGameMode()->
-
-	//World->GetAuthGameMode()->
-
-	//class ABaseGameMode* myGameMode = (ABaseGameMode*)World->GetAuthGameMode();
-
-	//PawnToSpawnClass = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
-	//UBlueprint* GeneratedBPPawn = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
-
-	//class APawn* PawnClassToSpawn = World->GetAuthGameMode()->DefaultPawnClass.GetDefaultObject();
-
-	//class AVR_Pawn* myPawn = Cast<AVR_Pawn>(myGameMode->DefaultPawnClass.GetDefaultObject());
-	//myGameMode->DefaultPawnClass;
-	//myGameMode->DefaultPawnClass; 
-	//PawnToSpawnClass =
-	//WORK IN PROGRESS KEEP FINDING THE PAWN
-
-	//class AVR_Pawn* myPawn = Cast<AVR_Pawn>(myGameMode->DefaultPawnClass.GetDefaultObject());
-
 	UE_LOG(LogTemp, Warning, TEXT("FROM HandlePawnKeyword() post keywords are length %i"), pPostWords.Num());
 
-	ActorSpawningPlaceLoc.X = 100.0f;//Not in use text instead
+	ActorSpawningPlaceLoc.X = 100.0f;//Not in use text instead PLACEHOLDER
 	ActorSpawningPlaceLoc.Y = 100.0f;
 	ActorSpawningPlaceLoc.Z = 0;
 
@@ -588,17 +601,14 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 	//Make a foreach here to check which is the To keyword and from there process it somehow
 	if( pPostWords.Num() > 4 )
 	{
-		if (pPostWords[4].Contains("To") )
+		if ( ChackInMountIfThereIsKW("To", pPostWords) > 0 )
 		{
-			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS FOR TO word "));
-			MyEngineSubsystem->ActionsToProcessOnLevelStart.Append( CreateNewActionsForActor(PawnSpawned, pPreWords, pPostWords, "To", 0, 4) );
+			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS FOR TO word "));                                                  
+			MyEngineSubsystem->ActionsToProcessOnLevelStart.Append( CreateNewActionsForActor(PawnSpawned, pPreWords, pPostWords, "To", 0, ChackInMountIfThereIsKW("To", pPostWords)));
 			UE_LOG(LogTemp, Warning, TEXT("FROM CHLPlugin THIS HAS PAWN CREATING ITS ACTIONS FOR TO word FINAL NUM IS %i"), MyEngineSubsystem->ActionsToProcessOnLevelStart.Num() );
 		}
 	}
 
-	
-	//UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is %s"), *GEngine->GetEngineSubsystemBase(UMyWorldSubsystem::StaticClass())->GetName() );
-	
 	if ( GEngine->GetEngineSubsystemBase(UMyWorldSubsystem::StaticClass()) != nullptr )
 	{
 		UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is Is not a null ptr")); 
@@ -608,13 +618,6 @@ void FCHLCleanWindowModule::HandlePawnKeyword(TArray<FString> pPreWords, TArray<
 		UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem IS a null ptr"));
 	}
 
-	//UE_LOG(LogTemp, Warning, TEXT(" FROM Spawn plugin chl windowHello WorldSubsystem Is %s"), *World->GetSubsystem<UMyWorldSubsystem>()->GetName() );
-	//World->GetSubsystem<UMyWorldSubsystem>(); 
-
-	//MyMyWorldSubsystem->ActualScriptsToRun = StringFromText; 
-	//MyMyWorldSubsystem->PrintMeMessageFromHere(); 
-	
-	//AIControllerToCast->MoveTo(PawnToCast->GetActorLocation() + ActorSpawningPlaceLoc);
 }
 
 //Desc: Neongho: Prossed and PreWord in other places

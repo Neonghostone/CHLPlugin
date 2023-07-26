@@ -60,8 +60,8 @@ public:
 	TArray<ActionsPerActor> CreateNewActionsForActor(AActor* ActorDoingAction, TArray<FString> PreWords, TArray<FString> PostWords, FString KeywordForActions, int32 pPreWordsI, int32 pPostWordsI);
 
 	bool bIsVectorOrFloat(FString StringEntering);
-
-
+	int32 ChackInMountIfThereIsKW(FString KeywordSearchingFor, TArray<FString> KeyboardMount);//KW stands for keyword
+	bool IsImportantKeyword(FString KeywordSearchingFor);
 
 	//Neongho: to get called by delegate
 	void OnBeginPlayFunction(); 

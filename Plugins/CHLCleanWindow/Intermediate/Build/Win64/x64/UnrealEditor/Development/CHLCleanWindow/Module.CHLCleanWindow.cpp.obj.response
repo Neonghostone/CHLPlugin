@@ -1,6 +1,6 @@
-D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp
+D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp
 /I .
-/I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Source\CHLCleanWindow\Private
+/I D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Source\CHLCleanWindow\Private
 /I Runtime\Projects\Public
 /I Runtime
 /I Runtime\TraceLog\Public
@@ -273,9 +273,9 @@ D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Inte
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AIModule\UHT
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
-/I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\UnrealEditor\Inc\CHLCleanWindow\UHT
-/I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Source
-/I D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Source\CHLCleanWindow\Public
+/I D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\UnrealEditor\Inc\CHLCleanWindow\UHT
+/I D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Source
+/I D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Source\CHLCleanWindow\Public
 /external:W0
 /external:I ThirdParty\mimalloc\include
 /external:I ThirdParty\LibTiff\Source\Win64
@@ -285,12 +285,12 @@ D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Inte
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/FI"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h"
-/FI"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Definitions.CHLCleanWindow.h"
-/Yu"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h"
-/Fp"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h.pch"
-/Fo"D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.obj"
-/sourceDependencies D:\VideoGameProjects\UE\Ue5\UnrealEngine5.2\CHLClean\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.dep.json
+/FI"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h"
+/FI"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Definitions.CHLCleanWindow.h"
+/Yu"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h"
+/Fp"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Intermediate\Build\Win64\x64\CHLCleanEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.InclOrderUnreal5_0.h.pch"
+/Fo"D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.obj"
+/sourceDependencies D:\SourceControl\Github\CHLProjectSource\CHLPlugin\Plugins\CHLCleanWindow\Intermediate\Build\Win64\x64\UnrealEditor\Development\CHLCleanWindow\Module.CHLCleanWindow.cpp.dep.json
 /Zc:inline
 /nologo
 /Oi
